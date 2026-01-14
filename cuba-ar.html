@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilih Bahasa AR</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="lang-page">
+    <header>
+        <nav class="navbar">
+            <div class="logo">✦ LAGENDA JAMBATAN TAMPARULI</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Utama</a></li>
+                <li><a href="sinopsis.html">Sinopsis</a></li>
+                <li><a href="tentang-ar.html">Mengenai AR</a></li>
+                <li><a href="tentang-kami.html">Pasukan Kami</a></li> 
+                <li><a href="hubungi-kami.html" class="btn-contact">Hubungi Kami</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <h2 class="section-title">Pilih Bahasa Anda</h2>
+        <p style="color: #ccc;">Sila pilih bahasa untuk memulakan pengalaman AR.</p>
+
+        <div class="lang-grid">
+            <div class="lang-card" onclick="showQR('melayu')">
+                <div class="lang-icon">
+                    <img src="https://flagcdn.com/w160/my.png" alt="Malaysia" class="flag-img">
+                </div>
+                <h3>Bahasa Melayu</h3>
+            </div>
+
+            <div class="lang-card" onclick="showQR('english')">
+                <div class="lang-icon">
+                    <img src="https://flagcdn.com/w160/gb.png" alt="UK" class="flag-img">
+                </div>
+                <h3>English</h3>
+            </div>
+
+            <div class="lang-card" onclick="showQR('dusun')">
+                <div class="lang-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Flag_of_Sabah.svg" alt="Sabah" class="flag-img">
+                </div>
+                <h3>Kadazan-Dusun</h3>
+            </div>
+        </div>
+
+        <div id="qr-display" class="qr-modal">
+            <div class="qr-content glass-panel">
+                <h3 id="selected-lang-title">Imbas Kod QR</h3>
+                <img id="qr-image" src="" alt="QR Code">
+                
+                <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 20px;">
+                    Halakan kamera telefon anda.<br>
+                    <span style="font-style: italic; opacity: 0.7;">Point your phone camera here.</span>
+                </p>
+                
+                <button onclick="closeQR()" class="btn-primary" style="border: none; cursor: pointer; width: 100%;">
+                    Tutup / Close
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+
+        function showQR(lang) {
+            const qrDisplay = document.getElementById('qr-display');
+            const qrImg = document.getElementById('qr-image');
+            const title = document.getElementById('selected-lang-title');
+
+            if(lang === 'melayu') {
+                title.innerText = "Imbas QR: Bahasa Melayu";
+                qrImg.src = "qr-melayu.png"; 
+            } else if(lang === 'english') {
+                title.innerText = "Scan QR: English";
+                qrImg.src = "qr-english.png";
+            } else if(lang === 'dusun') {
+                title.innerText = "Imbas QR: Kadazan-Dusun";
+                qrImg.src = "qr-dusun.png";
+            }
+
+            qrDisplay.style.display = 'flex';
+        }
+
+        function closeQR() {
+            document.getElementById('qr-display').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
