@@ -12,6 +12,9 @@
   <style>
     body { margin: 0; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     
+    /* Force Hide VR/Fullscreen Buttons (Safety Net) */
+    .a-enter-vr-button, .a-enter-ar-button { display: none !important; }
+
     /* Loading Screen */
     #loading-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -103,7 +106,7 @@
         this.onTouchMove = this.onTouchMove.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.onWheel = this.onWheel.bind(this);
-        this.onContextMenu = this.onContextMenu.bind(this); // Prevent right-click menu
+        this.onContextMenu = this.onContextMenu.bind(this);
 
         // Listeners
         document.addEventListener('mousedown', this.onMouseDown);
@@ -123,7 +126,7 @@
         }
       },
 
-      onContextMenu: function(e) { e.preventDefault(); }, // Disable right-click menu for panning
+      onContextMenu: function(e) { e.preventDefault(); }, 
 
       // --- MOUSE LOGIC ---
       onMouseDown: function(e) {
@@ -198,7 +201,7 @@
             this.handleOrbit(deltaX, deltaY);
         } 
         else if (e.touches.length === 2 && this.isPanning) {
-            // 1. Calculate Pan (Movement of center point)
+            // 1. Calculate Pan
             const currentCenterX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
             const currentCenterY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
             const deltaX = currentCenterX - this.startX;
@@ -208,7 +211,7 @@
             this.startY = currentCenterY;
             this.handlePan(deltaX, deltaY);
 
-            // 2. Calculate Zoom (Change in distance)
+            // 2. Calculate Zoom
             const currentDist = Math.hypot(
                 e.touches[0].pageX - e.touches[1].pageX,
                 e.touches[0].pageY - e.touches[1].pageY
@@ -239,9 +242,9 @@
         // Moving model Right = Moving Camera Left
         // Sensitivity 0.001
         this.el.object3D.position.x += dX * 0.001;
-        this.el.object3D.position.y -= dY * 0.001; // Invert Y for natural feel
+        this.el.object3D.position.y -= dY * 0.001; 
         
-        // Limit Pan Distance (Don't let it fly off screen)
+        // Limit Pan Distance
         this.el.object3D.position.x = Math.min(Math.max(this.el.object3D.position.x, -1), 1);
         this.el.object3D.position.y = Math.min(Math.max(this.el.object3D.position.y, -1), 1);
       },
@@ -252,7 +255,7 @@
         let newS = isAbsolute ? (this.startScale + change) : (currentS + change);
         
         // Clamp Distance (Min/Max Zoom)
-        newS = Math.min(Math.max(newS, 0.01), 0.5); // Max scale increased to 0.5 for closer look
+        newS = Math.min(Math.max(newS, 0.01), 0.5); 
         this.el.object3D.scale.set(newS, newS, newS);
       }
     });
