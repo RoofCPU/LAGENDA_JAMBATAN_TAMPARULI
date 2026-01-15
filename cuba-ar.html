@@ -46,51 +46,50 @@
     </div>
 </main>
 
-<script>
-    lucide.createIcons();
+<script src="https://unpkg.com/lucide@latest"></script> 
 
-    // ============================================
-    // DYNAMIC QR CODE GENERATOR SCRIPT
-    // ============================================
-    document.addEventListener('DOMContentLoaded', () => {
-        
-        // 1. Determine the target URL (AR.html)
-        // This logic ensures it works whether you are on localhost or a live domain.
-        let currentUrl = window.location.href;
-        let targetUrl = "";
+    <script>
+        // ============================================
+        // DYNAMIC QR CODE & ICON GENERATOR
+        // ============================================
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Initialize Icons (Moved INSIDE so it doesn't crash)
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            } else {
+                console.warn("Lucide library not loaded yet.");
+            }
 
-        // If currently on 'cuba-ar.html', replace it with 'AR.html'
-        if (currentUrl.includes('cuba-ar.html')) {
-            targetUrl = currentUrl.replace('cuba-ar.html', 'AR.html');
-        } 
-        // If on root (e.g., website.com/), append 'AR.html'
-        else if (currentUrl.endsWith('/')) {
-            targetUrl = currentUrl + 'AR.html';
-        } 
-        // Fallback
-        else {
-            let path = currentUrl.substring(0, currentUrl.lastIndexOf('/'));
-            targetUrl = path + '/AR.html';
-        }
+            // 2. Determine the target URL (AR.html)
+            let currentUrl = window.location.href;
+            let targetUrl = "";
 
-        console.log("Target AR URL:", targetUrl); // Debugging check
+            if (currentUrl.includes('cuba-ar.html')) {
+                targetUrl = currentUrl.replace('cuba-ar.html', 'AR.html');
+            } else if (currentUrl.endsWith('/')) {
+                targetUrl = currentUrl + 'AR.html';
+            } else {
+                let path = currentUrl.substring(0, currentUrl.lastIndexOf('/'));
+                targetUrl = path + '/AR.html';
+            }
 
-        // 2. Use a Free QR Code API (QR Server)
-        // format: https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=YOUR_URL
-        const qrServerBase = "https://api.qrserver.com/v1/create-qr-code/";
-        const qrSize = "300x300"; // High resolution
-        const qrColor = "000000"; // Black dots
-        const qrBg = "ffffff";    // White background
-        
-        // Construct the full image source URL
-        const finalQrSrc = `${qrServerBase}?size=${qrSize}&color=${qrColor}&bgcolor=${qrBg}&data=${encodeURIComponent(targetUrl)}`;
+            console.log("Target AR URL:", targetUrl);
 
-        // 3. Update the Image on the Page
-        const qrImageElement = document.getElementById('dynamic-qr');
-        if (qrImageElement) {
-            qrImageElement.src = finalQrSrc;
-        }
-    });
-</script>
+            // 3. Generate QR Code
+            const qrServerBase = "https://api.qrserver.com/v1/create-qr-code/";
+            const qrSize = "300x300";
+            const qrColor = "000000";
+            const qrBg = "ffffff";
+            
+            const finalQrSrc = `${qrServerBase}?size=${qrSize}&color=${qrColor}&bgcolor=${qrBg}&data=${encodeURIComponent(targetUrl)}`;
+
+            // 4. Update Image
+            const qrImageElement = document.getElementById('dynamic-qr');
+            if (qrImageElement) {
+                qrImageElement.src = finalQrSrc;
+            }
+        });
+    </script>
 </body>
 </html>
