@@ -6,66 +6,62 @@
     <title>Pasukan Kami</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="js/lang.js" defer></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
 <body>
 
     <header>
         <nav class="navbar">
-            <div class="logo">✦ LAGENDA JAMBATAN TAMPARULI</div>
+            <div class="logo">✦ JAMBATAN TAMPARULI</div>
+            <div class="lang-switcher">
+                <button class="lang-btn" onclick="changeLanguage('ms')" data-lang="ms">BM</button>
+                <button class="lang-btn" onclick="changeLanguage('en')" data-lang="en">EN</button>
+                <button class="lang-btn" onclick="changeLanguage('kd')" data-lang="kd">KD</button>
+            </div>
             <ul class="nav-links">
-                <li><a href="index.html">Utama</a></li>
-                <li><a href="sinopsis.html">Sinopsis</a></li>
-                <li><a href="tentang-ar.html">Mengenai AR</a></li>
-                <li><a href="tentang-kami.html" class="active-link">Pasukan Kami</a></li> 
-                <li><a href="hubungi-kami.html" class="btn-contact">Hubungi Kami</a></li>
+                <li><a href="index.html" data-i18n="nav_home">Utama</a></li>
+                <li><a href="sinopsis.html" data-i18n="nav_synopsis">Sinopsis</a></li>
+                <li><a href="tentang-ar.html" data-i18n="nav_ar">Mengenai AR</a></li>
+                <li><a href="tentang-kami.html" class="active-link" data-i18n="nav_team">Pasukan Kami</a></li> 
+                <li><a href="hubungi-kami.html" class="btn-contact" data-i18n="nav_contact">Hubungi Kami</a></li>
             </ul>
         </nav>
     </header>
 
-	
-	<main class="container">
-		<section class="supervisor-section">
-			<h2 class="section-title">Penyelia Projek</h2>
+    <main class="container">
+        <section class="supervisor-section">
+            <h2 class="section-title" data-i18n="team_supervisor">Penyelia Projek</h2>
+            
+            <div class="supervisor-card glass-panel">
+                <div class="supervisor-icon-box">
+                    <i data-lucide="graduation-cap"></i>
+                </div>
+                <div class="supervisor-info">
+                    <h3>SIR RYAN MACDONELL ANDRIAS</h3>
+                    <span class="badge">UMSKAL</span>
+                    <p class="role" data-i18n="team_role">Pensyarah Teknologi Multimedia</p>
+                    <div class="divider"></div>
+                </div>
+            </div>
+        </section>
 
-
-				<div class="supervisor-info">
-					<h3>SIR RYAN MACDONELL ANDRIAS</h3>
-					<span class="badge">PENSYARAH FAKULTI KOMPUTERAN DAN INFORMATIK</span>
-					<p class="role">Teknologi Multimedia</p>
-
-					<p class="bio">
-						Pakar dalam teknologi interaktif, gamifikasi, dan AR/VR. 
-						Komited membimbing inovasi digital untuk pendidikan masa depan.
-					</p>
-				</div>
-			</div>
-		</section>
-<br>
         <section class="team-section">
-            <h2 class="section-title">Kumpulan 1</h2>
-            <p style="margin-bottom: 40px; color: var(--text-muted);">Pelajar Tahun 3 Teknologi Multimedia, UMSKAL.</p>
+            <h2 class="section-title" data-i18n="team_title">Kumpulan 1</h2>
+            <p style="margin-bottom: 40px; color: var(--text-muted);" data-i18n="team_student">Pelajar Tahun 3...</p>
             
             <div class="team-grid">
-                <div class="member-card">
-                    <h4>RACHEL CHICANO BINTI WILLIE</h4>
-                    <p>BI23110378</p>
-                </div>
-                <div class="member-card">
-                    <h4>CHING KAI JIAN</h4>
-                    <p>BI23110197</p>
-                </div>
-                <div class="member-card">
-                    <h4>DELLIAN MESANIS</h4>
-                    <p>BI23110058</p>
-                </div>
-                <div class="member-card">
-                    <h4>MOHAMMAD IRHAMSHAH BIN SALEH</h4>
-                    <p>BI23110379</p>
-                </div>
+                <div class="member-card"><h4>RACHEL CHICANO</h4><p>BI23110378</p></div>
+                <div class="member-card"><h4>CHING KAI JIAN</h4><p>BI23110197</p></div>
+                <div class="member-card"><h4>DELLIAN MESANIS</h4><p>BI23110058</p></div>
+                <div class="member-card"><h4>ELPI ANGELIKA</h4><p>BI23110280</p></div>
+                <div class="member-card"><h4>NURAIDILAHVILENTENA</h4><p>BI23110102</p></div>
+                <div class="member-card"><h4>DOMINIC MATHEUS</h4><p>BI23110011</p></div>
+                <div class="member-card"><h4>MOHD FAUZIE</h4><p>BI23110328</p></div>
             </div>
         </section>
     </main>
 
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>

@@ -3,59 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sinopsis Cerita</title>
+    <title>Sinopsis | Lagenda Tamparuli</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="js/lang.js" defer></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
 <body>
 
     <header>
         <nav class="navbar">
-            <div class="logo">✦ LAGENDA JAMBATAN TAMPARULI</div>
+            <div class="logo">✦ JAMBATAN TAMPARULI</div>
+            <div class="lang-switcher">
+                <button class="lang-btn" onclick="changeLanguage('ms')" data-lang="ms">BM</button>
+                <button class="lang-btn" onclick="changeLanguage('en')" data-lang="en">EN</button>
+                <button class="lang-btn" onclick="changeLanguage('kd')" data-lang="kd">KD</button>
+            </div>
             <ul class="nav-links">
-                <li><a href="index.html">Utama</a></li>
-                <li><a href="sinopsis.html" class="active-link">Sinopsis</a></li>
-                <li><a href="tentang-ar.html">Mengenai AR</a></li>
-                <li><a href="tentang-kami.html">Pasukan Kami</a></li> 
-                <li><a href="hubungi-kami.html" class="btn-contact">Hubungi Kami</a></li>
+                <li><a href="index.html" data-i18n="nav_home">Utama</a></li>
+                <li><a href="sinopsis.html" class="active-link" data-i18n="nav_synopsis">Sinopsis</a></li>
+                <li><a href="tentang-ar.html" data-i18n="nav_ar">Mengenai AR</a></li>
+                <li><a href="tentang-kami.html" data-i18n="nav_team">Pasukan Kami</a></li> 
+                <li><a href="hubungi-kami.html" class="btn-contact" data-i18n="nav_contact">Hubungi Kami</a></li>
             </ul>
         </nav>
     </header>
 
-<main class="container">
-        <h2 class="section-title">Lagenda Tragis Tamparuli</h2>
+    <main class="container">
+        <h2 class="section-title" data-i18n="synopsis_title">Lagenda Tragis Tamparuli</h2>
         
         <div class="story-card glass-panel" style="margin-top: 40px;">
-            <p>
-                <strong>Tahun 1930-an:</strong> Di sebalik struktur konkrit yang kukuh, tersimpan sebuah rahsia lama. 
-                Pihak British berusaha membina jambatan merentasi Sungai Tamparuli, namun arus deras dan "kuasa misteri" 
-                sentiasa meruntuhkan binaan tersebut.
-            </p>
-            
-            <p>
-                Seorang pegawai British, <strong>Robinson</strong>, buntu mencari penyelesaian. Namun, di tengah kekalutan itu, 
-                hatinya tertawan oleh <strong>Solungkoi</strong>, gadis Dusun yang paling jelita di kampung tersebut. 
-                Percintaan dua benua ini berputik indah, namun dicemburui oleh Intang, seorang pemuda tempatan yang berdendam.
-            </p>
-            
-            <p>
-                Demi memusnahkan Robinson, Intang menggunakan kepercayaan mistik. Melalui perantara Odu-Odu, 
-                dikatakan bahawa <strong>Tonduokar (Hantu Air)</strong> menuntut korban gadis paling cantik untuk mengizinkan jambatan itu berdiri. 
-                Intang menghasut Robinson bahawa hanya Solungkoi yang mampu menyelamatkan projek tersebut.
-            </p>
-            
-            <p>
-                Dalam dilema antara tugas dan cinta, Robinson melakukan pengkhianatan terbesar. Solungkoi dikorbankan hidup-hidup 
-                di dasar sungai. Sebelum tenggelam, dia menyumpah: <em>"Jambatan ini tidak akan kukuh selagi darah Robinson tidak mengalir sama!"</em>.
-            </p>
-            
-            <p>
-                Dihantui rasa bersalah, Robinson akhirnya mengukir nama <strong>SOLUNGKOI</strong> pada jambatan itu sebelum menamatkan riwayatnya sendiri 
-                di sungai yang sama. Kini, kisah mereka kekal sebagai peringatan tentang harga sebuah kesetiaan.
-            </p>
+            <p data-i18n="synopsis_p1"><strong>Tahun 1930-an:</strong> Di sebalik struktur konkrit...</p>
+            <p data-i18n="synopsis_p2">Seorang pegawai British, <strong>Robinson</strong>...</p>
+            <p data-i18n="synopsis_p3">Demi memusnahkan Robinson...</p>
+            <p data-i18n="synopsis_p4">Dalam dilema antara tugas...</p>
+            <p data-i18n="synopsis_p5">Dihantui rasa bersalah...</p>
         </div>
     </main>
 
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>

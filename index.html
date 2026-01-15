@@ -3,57 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lagenda Jambatan Tamparuli - AR Experience</title>
+    <title>Lagenda Jambatan Tamparuli</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="js/lang.js" defer></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
 <body>
-	
-	<div class="video-bg">
-    <video autoplay muted loop playsinline>
-        <source src="./assets/videos/background.webm" type="video/mp4">
-    </video>
-    <div class="overlay"></div>
-</div>
-	
+
+    <div class="video-bg">
+        <video autoplay muted loop playsinline poster="assets/images/Lagenda Jambatan Tamparuli.webp">
+            <source src="assets/videos/background.webm" type="video/webm">
+        </video>
+        <div class="overlay"></div>
+    </div>
+
     <header>
         <nav class="navbar">
-            <div class="logo">✦ LAGENDA JAMBATAN TAMPARULI</div>
+            <div class="logo">✦ JAMBATAN TAMPARULI</div>
+            
+            <div class="lang-switcher">
+                <button class="lang-btn" onclick="changeLanguage('ms')" data-lang="ms">BM</button>
+                <button class="lang-btn" onclick="changeLanguage('en')" data-lang="en">EN</button>
+                <button class="lang-btn" onclick="changeLanguage('kd')" data-lang="kd">KD</button>
+            </div>
+
             <ul class="nav-links">
-                <li><a href="sinopsis.html">Sinopsis</a></li>
-                <li><a href="tentang-ar.html">Mengenai AR</a></li>
-                <li><a href="tentang-kami.html">Pasukan Kami</a></li> 
-                <li><a href="hubungi-kami.html" class="btn-contact">Hubungi Kami</a></li>
+                <li><a href="sinopsis.html" data-i18n="nav_synopsis">Sinopsis</a></li>
+                <li><a href="tentang-ar.html" data-i18n="nav_ar">Mengenai AR</a></li>
+                <li><a href="tentang-kami.html" data-i18n="nav_team">Pasukan Kami</a></li> 
+                <li><a href="hubungi-kami.html" class="btn-contact" data-i18n="nav_contact">Hubungi Kami</a></li>
             </ul>
         </nav>
     </header>
 
-<section class="hero">
-    <div class="hero-container">
-        <div class="hero-content glass-panel"> 
-            <p class="subtitle">Legenda Rakyat Sabah</p>
-            <h1>Lagenda <br><span class="highlight">Jambatan Tamparuli</span></h1>
-            <p class="description">
-                Alami kisah <strong>Lagenda Jambatan Tamparuli</strong> melalui teknologi Augmented Reality. 
-                Gabungan mistik cerita rakyat dan inovasi digital menanti anda.
-            </p>
-            <div class="hero-btns">
-                <a href="cuba-ar.html" class="btn-primary"> Cuba AR Sekarang</a>
-                <a href="sinopsis.html" class="btn-secondary">Baca Kisah</a>
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content glass-panel"> 
+                <p class="subtitle" data-i18n="hero_subtitle">Legenda Rakyat Sabah</p>
+                <h1 data-i18n="hero_title">Lagenda <br><span class="highlight">Jambatan Tamparuli</span></h1>
+                <p class="description" data-i18n="hero_desc">
+                    Alami kisah <strong>Lagenda Jambatan Tamparuli</strong> melalui teknologi Augmented Reality.
+                </p>
+                <div class="hero-btns">
+                    <a href="cuba-ar.html" class="btn-primary" data-i18n="btn_ar">📱 Cuba AR Sekarang</a>
+                    <a href="sinopsis.html" class="btn-secondary" data-i18n="btn_read">Baca Kisah</a>
+                </div>
             </div>
-        </div>
 
             <div class="hero-image">
-                <img src="./assets/images/Lagenda Jambatan Tamparuli.webp" alt="Buku AR Lagenda Jambatan Tamparuli" class="floating-book">
+                <img src="assets/images/Lagenda Jambatan Tamparuli.webp" alt="Book Cover" class="floating-book">
             </div>
         </div>
     </section>
 
     <footer style="text-align: center; padding: 20px; font-size: 0.8rem; opacity: 0.6;">
-        <p>&copy; 2026 Projek AR UMSKAL. All Rights Reserved.</p>
+        <p>&copy; 2026 UMSKAL. <span data-i18n="footer_rights">Hak Cipta Terpelihara.</span></p>
     </footer>
-
-    <script src="https://unpkg.com/lucide@latest"></script>
+    
     <script>lucide.createIcons();</script>
 </body>
 </html>

@@ -6,24 +6,30 @@
     <title>Pilih Bahasa AR</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="js/lang.js" defer></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
 <body class="lang-page">
     <header>
         <nav class="navbar">
-            <div class="logo">✦ LAGENDA JAMBATAN TAMPARULI</div>
+            <div class="logo">✦ JAMBATAN TAMPARULI</div>
+            <div class="lang-switcher">
+                <button class="lang-btn" onclick="changeLanguage('ms')" data-lang="ms">BM</button>
+                <button class="lang-btn" onclick="changeLanguage('en')" data-lang="en">EN</button>
+                <button class="lang-btn" onclick="changeLanguage('kd')" data-lang="kd">KD</button>
+            </div>
             <ul class="nav-links">
-                <li><a href="index.html">Utama</a></li>
-                <li><a href="sinopsis.html">Sinopsis</a></li>
-                <li><a href="tentang-ar.html">Mengenai AR</a></li>
-                <li><a href="tentang-kami.html">Pasukan Kami</a></li> 
-                <li><a href="hubungi-kami.html" class="btn-contact">Hubungi Kami</a></li>
+                <li><a href="index.html" data-i18n="nav_home">Utama</a></li>
+                <li><a href="sinopsis.html" data-i18n="nav_synopsis">Sinopsis</a></li>
+                <li><a href="tentang-ar.html" data-i18n="nav_ar">Mengenai AR</a></li>
+                <li><a href="hubungi-kami.html" class="btn-contact" data-i18n="nav_contact">Hubungi Kami</a></li>
             </ul>
         </nav>
     </header>
     
     <main class="container">
-        <h2 class="section-title">Pilih Bahasa Anda</h2>
-        <p style="color: #ccc;">Sila pilih bahasa untuk memulakan pengalaman AR.</p>
+        <h2 class="section-title" data-i18n="select_lang_title">Pilih Bahasa AR</h2>
+        <p style="color: #ccc;" data-i18n="select_lang_desc">Sila pilih bahasa untuk memulakan pengalaman AR.</p>
 
         <div class="lang-grid">
             <div class="lang-card" onclick="showQR('melayu')">
@@ -50,12 +56,11 @@
 
         <div id="qr-display" class="qr-modal">
             <div class="qr-content glass-panel">
-                <h3 id="selected-lang-title">Imbas Kod QR</h3>
-                <img id="qr-image" src="" alt="QR Code">
+                <h3 id="selected-lang-title" data-i18n="modal_title">Imbas Kod QR</h3>
+                <img id="qr-image" src="" alt="QR Code" style="max-width: 250px; width: 100%;">
                 
-                <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 20px;">
-                    Halakan kamera telefon anda.<br>
-                    <span style="font-style: italic; opacity: 0.7;">Point your phone camera here.</span>
+                <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 20px;" data-i18n="modal_desc">
+                    Halakan kamera telefon anda.
                 </p>
                 
                 <button onclick="closeQR()" class="btn-primary" style="border: none; cursor: pointer; width: 100%;">
@@ -65,7 +70,6 @@
         </div>
     </main>
 
-    <script src="https://unpkg.com/lucide@latest"></script>
     <script>
         lucide.createIcons();
 
@@ -75,7 +79,8 @@
             const title = document.getElementById('selected-lang-title');
 
             if(lang === 'melayu') {
-                title.innerText = "Imbas QR: Bahasa Melayu";
+                // Keep direct text update for Modal Title to match selection
+                title.innerText = "Imbas QR: Bahasa Melayu"; 
                 qrImg.src = "qr-melayu.png"; 
             } else if(lang === 'english') {
                 title.innerText = "Scan QR: English";

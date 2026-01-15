@@ -785,3 +785,48 @@ header {
     }
     .container { padding-top: 180px; } /* More space for stacked nav */
 }
+
+/* =========================================
+   LANGUAGE SWITCHER STYLES
+   ========================================= */
+.lang-switcher {
+    display: flex;
+    gap: 8px;
+    margin-right: 20px; /* Space between logo and nav links if placed there */
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lang-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 5px 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.lang-btn.active {
+    background: var(--primary-accent);
+    color: #000;
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
+}
+
+/* Mobile Adjustment: Put switcher above or below nav items */
+@media (max-width: 768px) {
+    .lang-switcher {
+        margin: 10px auto;
+        justify-content: center;
+    }
+}
