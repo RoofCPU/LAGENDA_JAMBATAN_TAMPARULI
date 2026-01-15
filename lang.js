@@ -76,7 +76,7 @@ const translations = {
         synopsis_p4: "Torn between duty to the empire and his true love, Robinson committed the ultimate betrayal. Solungkoi was sacrificed alive at the riverbed. Before drowning, she cursed: <em>\"This bridge will not stand firm until Robinson's blood flows with it!\"</em>.",
         synopsis_p5: "The bridge stood firm, but Robinson's soul was shattered. Haunted by guilt, he carved the name <strong>SOLUNGKOI</strong> onto the bridge before taking his own life in the same river. Today, their story remains a reminder of the price of loyalty.",
 
-        ar_title: "Augmented Reality Tech",
+        ar_title: "Augmented Reality Technology",
         ar_desc: "We use WebAR technology. Your camera detects images on the book and overlays 3D objects and animations on them in real-time.",
         step_1: "Scan QR", step_1_desc: "Access the app via the provided QR code.",
         step_2: "Select Language", step_2_desc: "Choose narrative in Malay, English, or Kadazan-Dusun.",
@@ -88,10 +88,10 @@ const translations = {
 
         team_title: "Our Team",
         supervisor_title: "Project Supervisor",
-        supervisor_role: "Lecturer of Multimedia Technology",
+        supervisor_role: "Lecturer of Multimedia Technology Course, Faculty of Computing and Informatics",
         supervisor_bio: "Expert in interactive technology, gamification, and AR/VR. Guiding digital innovation for future education.",
         group_name: "Group 1",
-        group_desc: "Year 3 Multimedia Technology Students, UMSKAL.",
+        group_desc: "Year 3 Multimedia Technology Students, Faculty of Computing and Informatics, UMSKAL.",
 
         contact_title: "Contact Us",
         contact_intro: "Questions about our AR project? Meet us at the exhibition or follow our social media.",
@@ -136,10 +136,10 @@ const translations = {
 
         team_title: "Tinimungan Dahai",
         supervisor_title: "Mononuduk Projek",
-        supervisor_role: "Pensyarah Teknologi Multimedia",
+        supervisor_role: "Pensyarah Kursus Teknologi Multimedia, Fakulti Komputeran dan Informatik",
         supervisor_bio: "Pakar id teknologi interaktif om AR/VR.",
         group_name: "Tinimungan 1",
-        group_desc: "Susumikul Toun 3 Teknologi Multimedia, UMSKAL.",
+        group_desc: "Susumikul Toun 3 Teknologi Multimedia, Fakulti Komputeran dan Informatik, UMSKAL.",
 
         contact_title: "Hubungi Yahai",
         contact_intro: "Haro ula? Rumikot id pameran dahai toi intaai media sosial.",

@@ -6,13 +6,14 @@
     <title>Teknologi AR</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="js/lang.js" defer></script>
+    <script src="lang.js" defer></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
     <header>
         <nav class="navbar">
-            <div class="logo">✦ JAMBATAN TAMPARULI</div>
+            <div class="logo">✦LAGENDA JAMBATAN TAMPARULI</div>
             <div class="lang-switcher">
                 <button class="lang-btn" onclick="changeLanguage('ms')" data-lang="ms">BM</button>
                 <button class="lang-btn" onclick="changeLanguage('en')" data-lang="en">EN</button>
@@ -35,13 +36,53 @@
                 Kami menggunakan teknologi WebAR berasaskan penanda. Kamera peranti anda akan mengesan imej pada buku dan memaparkan objek 3D di atasnya.
             </p>
 
-            <div class="ar-steps-grid">
-                <div class="ar-step-card"><div class="ar-step-icon">1</div><h4 data-i18n="step_1">Imbas Kod QR</h4><p data-i18n="step_1_desc">Dapatkan akses aplikasi.</p></div>
-                <div class="ar-step-card"><div class="ar-step-icon">2</div><h4 data-i18n="step_2">Pilih Bahasa</h4><p data-i18n="step_2_desc">Pilih naratif.</p></div>
-                <div class="ar-step-card"><div class="ar-step-icon">3</div><h4 data-i18n="step_3">Sedia Buku</h4><p data-i18n="step_3_desc">Buka buku.</p></div>
-                <div class="ar-step-card"><div class="ar-step-icon">4</div><h4 data-i18n="step_4">Halakan Kamera</h4><p data-i18n="step_4_desc">Pastikan cerah.</p></div>
-                <div class="ar-step-card"><div class="ar-step-icon">5</div><h4 data-i18n="step_5">Lihat Magis</h4><p data-i18n="step_5_desc">3D muncul.</p></div>
-                <div class="ar-step-card"><div class="ar-step-icon">6</div><h4 data-i18n="step_6">Interaksi</h4><p data-i18n="step_6_desc">Sentuh skrin.</p></div>
+            <div class="ar-page-wrapper">
+                <div class="carousel-container" id="arCarousel">
+                    <div class="carousel-card">
+                        <div class="ar-step-icon">1</div>
+                        <h4 data-i18n="step_1">Imbas Kod QR</h4>
+                        <p data-i18n="step_1_desc">Dapatkan akses aplikasi melalui kod QR yang disediakan.</p>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="ar-step-icon">2</div>
+                        <h4 data-i18n="step_2">Pilih Bahasa</h4>
+                        <p data-i18n="step_2_desc">Pilih naratif dalam BM, English, atau Kadazan-Dusun.</p>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="ar-step-icon">3</div>
+                        <h4 data-i18n="step_3">Sedia Buku</h4>
+                        <p data-i18n="step_3_desc">Buka buku cerita pada halaman yang mempunyai penanda.</p>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="ar-step-icon">4</div>
+                        <h4 data-i18n="step_4">Halakan Kamera</h4>
+                        <p data-i18n="step_4_desc">Pastikan pencahayaan terang dan halakan kamera ke buku.</p>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="ar-step-icon">5</div>
+                        <h4 data-i18n="step_5">Lihat Magis</h4>
+                        <p data-i18n="step_5_desc">Karakter dan animasi 3D akan muncul di atas buku!</p>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="ar-step-icon">6</div>
+                        <h4 data-i18n="step_6">Interaksi</h4>
+                        <p data-i18n="step_6_desc">Sentuh skrin untuk mendengar audio atau melihat aksi.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-nav">
+                    <button class="nav-btn" id="prevBtn"><i data-lucide="chevron-left"></i></button>
+                    <button class="nav-btn" id="nextBtn"><i data-lucide="chevron-right"></i></button>
+                </div>
+
+                <div class="dots-container">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
             </div>
 
             <div class="glass-panel" style="margin-top: 40px; padding: 20px;">
@@ -51,5 +92,73 @@
         </section>
     </main>
 
+    <script>
+        lucide.createIcons();
+
+        // 3D Rotating Carousel Logic
+        let activeIndex = 0;
+        const cards = document.querySelectorAll('.carousel-card');
+        const totalCards = cards.length;
+
+        function updateCarousel() {
+            cards.forEach((card, index) => {
+                let position = index - activeIndex;
+                
+                // Logic for infinite loop illusion
+                if (position > totalCards / 2) position -= totalCards;
+                if (position < -totalCards / 2) position += totalCards;
+
+                const absPosition = Math.abs(position);
+                const isActive = position === 0;
+
+                // Apply transforms
+                // TranslateX: Moves cards left/right
+                // TranslateZ: Moves side cards back into depth
+                // RotateY: Angles side cards
+                card.style.transform = `
+                    translateX(${position * 280}px)
+                    translateZ(${-absPosition * 150}px)
+                    rotateY(${position * -10}deg)
+                    scale(${1 - absPosition * 0.1})
+                `;
+                
+                // Fade out distant cards
+                card.style.opacity = absPosition > 2 ? '0' : `${1 - absPosition * 0.3}`;
+                card.style.zIndex = 10 - absPosition; // Center card on top
+                card.style.pointerEvents = isActive ? 'auto' : 'none';
+                
+                // Highlight active card styling
+                if(isActive) {
+                    card.classList.add('active-card');
+                } else {
+                    card.classList.remove('active-card');
+                }
+            });
+
+            // Update Dots
+            document.querySelectorAll('.dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === activeIndex);
+            });
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            activeIndex = (activeIndex + 1) % totalCards;
+            updateCarousel();
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            activeIndex = (activeIndex - 1 + totalCards) % totalCards;
+            updateCarousel();
+        });
+
+        // Auto-rotate every 5 seconds
+        setInterval(() => {
+            activeIndex = (activeIndex + 1) % totalCards;
+            updateCarousel();
+        }, 5000);
+
+        // Initial call
+        updateCarousel();
+    </script>
 </body>
 </html>
