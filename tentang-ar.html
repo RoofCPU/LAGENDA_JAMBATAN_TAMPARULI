@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="js/lang.js" defer></script>
-    <script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
 <body>
 
@@ -32,10 +31,12 @@
     <main class="container">
         <section class="ar-detail-section">
             <h2 class="section-title" data-i18n="ar_title">Teknologi Augmented Reality</h2>
-            <p class="ar-intro" data-i18n="ar_desc">Kami menggunakan teknologi WebAR...</p>
+            <p data-i18n="ar_desc" style="max-width: 800px; margin: 0 auto; color: var(--text-muted);">
+                Kami menggunakan teknologi WebAR berasaskan penanda. Kamera peranti anda akan mengesan imej pada buku dan memaparkan objek 3D di atasnya.
+            </p>
 
             <div class="ar-steps-grid">
-                <div class="ar-step-card"><div class="ar-step-icon">1</div><h4 data-i18n="step_1">Imbas QR</h4><p data-i18n="step_1_desc">Akses aplikasi.</p></div>
+                <div class="ar-step-card"><div class="ar-step-icon">1</div><h4 data-i18n="step_1">Imbas Kod QR</h4><p data-i18n="step_1_desc">Dapatkan akses aplikasi.</p></div>
                 <div class="ar-step-card"><div class="ar-step-icon">2</div><h4 data-i18n="step_2">Pilih Bahasa</h4><p data-i18n="step_2_desc">Pilih naratif.</p></div>
                 <div class="ar-step-card"><div class="ar-step-icon">3</div><h4 data-i18n="step_3">Sedia Buku</h4><p data-i18n="step_3_desc">Buka buku.</p></div>
                 <div class="ar-step-card"><div class="ar-step-icon">4</div><h4 data-i18n="step_4">Halakan Kamera</h4><p data-i18n="step_4_desc">Pastikan cerah.</p></div>
@@ -43,17 +44,12 @@
                 <div class="ar-step-card"><div class="ar-step-icon">6</div><h4 data-i18n="step_6">Interaksi</h4><p data-i18n="step_6_desc">Sentuh skrin.</p></div>
             </div>
 
-            <div class="ar-preview-box">
-                <div class="preview-content">
-                    <h3>Visualisasi Digital</h3>
-                </div>
-                <div class="preview-visual">
-                    <img src="assets/images/AR.jpg" alt="AR Demo" class="ar-image" loading="lazy">
-                </div>
+            <div class="glass-panel" style="margin-top: 40px; padding: 20px;">
+                <h3 style="margin-bottom: 20px; color: var(--primary-accent);" data-i18n="ar_preview_header">Visualisasi Digital</h3>
+                <img src="assets/images/AR.jpg" alt="AR Demo" style="max-width: 100%; border-radius: 10px; opacity: 0.8;" loading="lazy">
             </div>
         </section>
     </main>
 
-    <script>lucide.createIcons();</script>
 </body>
 </html>
