@@ -28,43 +28,69 @@
         </nav>
     </header>
     
-    <main class="container">
-        <h2 class="section-title" data-i18n="select_lang_title">Mula Pengalaman AR</h2>
-        <p style="color: #ccc; margin-bottom: 20px;" data-i18n="select_lang_desc">Tekan butang di bawah atau imbas kod QR untuk masuk.</p>
+<main class="container">
+    <h2 class="section-title" data-i18n="select_lang_title">Mula Pengalaman AR</h2>
+    <p style="color: #ccc; margin-bottom: 20px;" data-i18n="select_lang_desc">Tekan butang di bawah atau imbas kod QR untuk masuk.</p>
 
-        <div class="ar-entry-wrapper" style="justify-content: center;">
-            <div class="ar-option-card">
-                <img id="dynamic-qr" src="" alt="AR QR Code" class="qr-image" style="width: 200px; height: 200px; border: 5px solid #fff; border-radius: 10px; margin-bottom: 20px;">
-                
-                <p style="color: var(--secondary-accent); font-weight: bold; margin: 10px 0;">— ATAU / OR —</p>
+    <div class="ar-entry-wrapper" style="justify-content: center;">
+        <div class="ar-option-card">
+            
+            <img id="dynamic-qr" src="" alt="Loading QR Code..." class="qr-image" style="width: 200px; height: 200px; border: 5px solid #fff; border-radius: 10px; margin-bottom: 20px;">
+            
+            <p style="color: var(--secondary-accent); font-weight: bold; margin: 10px 0;">— ATAU / OR —</p>
 
-                <a href="AR.html" class="btn-primary" style="text-decoration: none; width: 100%; display: block; margin-top: 10px;" data-i18n="btn_enter_ar">
-                    Masuk Dunia AR
-                </a>
-            </div>
+            <a href="AR.html" class="btn-primary" style="text-decoration: none; width: 100%; display: block; margin-top: 10px;" data-i18n="btn_enter_ar">
+                Masuk Dunia AR
+            </a>
         </div>
-    </main>
+    </div>
+</main>
 
-    <script>
-        lucide.createIcons();
+<script>
+    lucide.createIcons();
 
-        // Automatically generate QR code pointing to AR.html
-        document.addEventListener('DOMContentLoaded', () => {
-            let currentUrl = window.location.href;
-            let targetUrl = "";
+    // ============================================
+    // DYNAMIC QR CODE GENERATOR SCRIPT
+    // ============================================
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        // 1. Determine the target URL (AR.html)
+        // This logic ensures it works whether you are on localhost or a live domain.
+        let currentUrl = window.location.href;
+        let targetUrl = "";
 
-            if (currentUrl.includes('cuba-ar.html')) {
-                targetUrl = currentUrl.replace('cuba-ar.html', 'AR.html');
-            } else if (currentUrl.endsWith('/')) {
-                targetUrl = currentUrl + 'AR.html';
-            } else {
-                let path = currentUrl.substring(0, currentUrl.lastIndexOf('/'));
-                targetUrl = path + '/AR.html';
-            }
+        // If currently on 'cuba-ar.html', replace it with 'AR.html'
+        if (currentUrl.includes('cuba-ar.html')) {
+            targetUrl = currentUrl.replace('cuba-ar.html', 'AR.html');
+        } 
+        // If on root (e.g., website.com/), append 'AR.html'
+        else if (currentUrl.endsWith('/')) {
+            targetUrl = currentUrl + 'AR.html';
+        } 
+        // Fallback
+        else {
+            let path = currentUrl.substring(0, currentUrl.lastIndexOf('/'));
+            targetUrl = path + '/AR.html';
+        }
 
-            const qrServer = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&color=000000&bgcolor=ffffff&data=";
-            document.getElementById('dynamic-qr').src = qrServer + encodeURIComponent(targetUrl);
-        });
-    </script>
+        console.log("Target AR URL:", targetUrl); // Debugging check
+
+        // 2. Use a Free QR Code API (QR Server)
+        // format: https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=YOUR_URL
+        const qrServerBase = "https://api.qrserver.com/v1/create-qr-code/";
+        const qrSize = "300x300"; // High resolution
+        const qrColor = "000000"; // Black dots
+        const qrBg = "ffffff";    // White background
+        
+        // Construct the full image source URL
+        const finalQrSrc = `${qrServerBase}?size=${qrSize}&color=${qrColor}&bgcolor=${qrBg}&data=${encodeURIComponent(targetUrl)}`;
+
+        // 3. Update the Image on the Page
+        const qrImageElement = document.getElementById('dynamic-qr');
+        if (qrImageElement) {
+            qrImageElement.src = finalQrSrc;
+        }
+    });
+</script>
 </body>
 </html>
