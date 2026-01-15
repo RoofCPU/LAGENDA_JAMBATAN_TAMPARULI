@@ -467,3 +467,69 @@ header {
     .carousel-container { height: 400px; }
     .carousel-card { width: 80%; height: 350px; }
 }
+
+/* =========================================
+   CUBA-AR.HTML SPECIFIC STYLES
+   ========================================= */
+.ar-entry-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    align-items: stretch;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.ar-option-card {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+.ar-option-card:hover {
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 30px rgba(0, 210, 255, 0.15);
+}
+
+.qr-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 5px solid #fff;
+}
+
+.option-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: var(--primary-accent);
+}
+
+.divider-vertical {
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--secondary-accent), transparent);
+    opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+    .ar-entry-wrapper {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .divider-vertical {
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(to right, transparent, var(--secondary-accent), transparent);
+    }
+}

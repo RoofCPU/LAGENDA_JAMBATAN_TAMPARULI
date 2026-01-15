@@ -13,7 +13,7 @@
 
     <header>
         <nav class="navbar">
-            <div class="logo">✦LAGENDA JAMBATAN TAMPARULI</div>
+            <div class="logo">✦ LAGENDA JAMBATAN TAMPARULI</div>
             <div class="lang-switcher">
                 <button class="lang-btn" onclick="changeLanguage('ms')" data-lang="ms">BM</button>
                 <button class="lang-btn" onclick="changeLanguage('en')" data-lang="en">EN</button>
@@ -31,39 +31,37 @@
 
     <main class="container">
         <section class="ar-detail-section">
-            <h1 class="section-title" data-i18n="ar_title">Cara Menggunakan AR</h1>
+            <h2 class="section-title" data-i18n="ar_title">Cara Menggunakan AR</h2>
+            <p data-i18n="ar_desc" style="max-width: 800px; margin: 0 auto; color: var(--text-muted);">
+                Kami menggunakan teknologi WebAR berasaskan penanda. Ikuti langkah di bawah untuk melihat magisnya.
+            </p>
 
             <div class="ar-page-wrapper">
                 <div class="carousel-container" id="arCarousel">
                     <div class="carousel-card">
                         <div class="ar-step-icon">1</div>
-                        <h4 data-i18n="step_1">Imbas Kod QR</h4>
-                        <p data-i18n="step_1_desc">Dapatkan akses aplikasi melalui kod QR yang disediakan.</p>
+                        <h4 data-i18n="step_1">Akses Aplikasi</h4>
+                        <p data-i18n="step_1_desc">Tekan pautan atau imbas Kod QR.</p>
                     </div>
                     <div class="carousel-card">
                         <div class="ar-step-icon">2</div>
-                        <h4 data-i18n="step_2">Pilih Bahasa</h4>
-                        <p data-i18n="step_2_desc">Pilih naratif dalam BM, English, atau Kadazan-Dusun.</p>
+                        <h4 data-i18n="step_2">Sedia Buku</h4>
+                        <p data-i18n="step_2_desc">Buka buku cerita pada halaman yang mempunyai penanda.</p>
                     </div>
                     <div class="carousel-card">
                         <div class="ar-step-icon">3</div>
-                        <h4 data-i18n="step_3">Sedia Buku</h4>
-                        <p data-i18n="step_3_desc">Buka buku cerita pada halaman yang mempunyai penanda.</p>
+                        <h4 data-i18n="step_3">Halakan Kamera</h4>
+                        <p data-i18n="step_3_desc">Pastikan pencahayaan terang dan halakan kamera ke buku.</p>
                     </div>
                     <div class="carousel-card">
                         <div class="ar-step-icon">4</div>
-                        <h4 data-i18n="step_4">Halakan Kamera</h4>
-                        <p data-i18n="step_4_desc">Pastikan pencahayaan terang dan halakan kamera ke buku.</p>
+                        <h4 data-i18n="step_4">Lihat Magis</h4>
+                        <p data-i18n="step_4_desc">Karakter dan animasi 3D akan muncul di atas buku!</p>
                     </div>
                     <div class="carousel-card">
                         <div class="ar-step-icon">5</div>
-                        <h4 data-i18n="step_5">Lihat Magis</h4>
-                        <p data-i18n="step_5_desc">Karakter dan animasi 3D akan muncul di atas buku!</p>
-                    </div>
-                    <div class="carousel-card">
-                        <div class="ar-step-icon">6</div>
-                        <h4 data-i18n="step_6">Interaksi</h4>
-                        <p data-i18n="step_6_desc">Sentuh skrin untuk mendengar audio atau melihat aksi.</p>
+                        <h4 data-i18n="step_5">Interaksi</h4>
+                        <p data-i18n="step_5_desc">Sentuh skrin untuk mendengar audio atau melihat aksi.</p>
                     </div>
                 </div>
 
@@ -78,8 +76,12 @@
                     <span class="dot"></span>
                     <span class="dot"></span>
                     <span class="dot"></span>
-                    <span class="dot"></span>
                 </div>
+            </div>
+
+            <div class="glass-panel" style="margin-top: 40px; padding: 20px;">
+                <h3 style="margin-bottom: 20px; color: var(--primary-accent);" data-i18n="ar_preview_header">Visualisasi Digital</h3>
+                <img src="assets/images/AR.jpg" alt="AR Demo" style="max-width: 100%; border-radius: 10px; opacity: 0.8;" loading="lazy">
             </div>
         </section>
     </main>
@@ -96,17 +98,12 @@
             cards.forEach((card, index) => {
                 let position = index - activeIndex;
                 
-                // Logic for infinite loop illusion
                 if (position > totalCards / 2) position -= totalCards;
                 if (position < -totalCards / 2) position += totalCards;
 
                 const absPosition = Math.abs(position);
                 const isActive = position === 0;
 
-                // Apply transforms
-                // TranslateX: Moves cards left/right
-                // TranslateZ: Moves side cards back into depth
-                // RotateY: Angles side cards
                 card.style.transform = `
                     translateX(${position * 280}px)
                     translateZ(${-absPosition * 150}px)
@@ -114,12 +111,10 @@
                     scale(${1 - absPosition * 0.1})
                 `;
                 
-                // Fade out distant cards
                 card.style.opacity = absPosition > 2 ? '0' : `${1 - absPosition * 0.3}`;
-                card.style.zIndex = 10 - absPosition; // Center card on top
+                card.style.zIndex = 10 - absPosition; 
                 card.style.pointerEvents = isActive ? 'auto' : 'none';
                 
-                // Highlight active card styling
                 if(isActive) {
                     card.classList.add('active-card');
                 } else {
@@ -127,7 +122,6 @@
                 }
             });
 
-            // Update Dots
             document.querySelectorAll('.dot').forEach((dot, i) => {
                 dot.classList.toggle('active', i === activeIndex);
             });
@@ -143,13 +137,12 @@
             updateCarousel();
         });
 
-        // Auto-rotate every 5 seconds
+        // Auto-rotate
         setInterval(() => {
             activeIndex = (activeIndex + 1) % totalCards;
             updateCarousel();
         }, 5000);
 
-        // Initial call
         updateCarousel();
     </script>
 </body>

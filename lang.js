@@ -15,7 +15,7 @@ const translations = {
         btn_read: "Baca Kisah Penuh",
         footer_rights: "Hak Cipta Terpelihara.",
 
-        // Sinopsis (FULL TEXT)
+        // Sinopsis
         synopsis_title: "Lagenda Tragis Tamparuli",
         synopsis_p1: "<strong>Tahun 1930-an:</strong> Di sebalik struktur konkrit yang kukuh, tersimpan sebuah rahsia lama. Pihak British berusaha membina jambatan merentasi Sungai Tamparuli, namun arus deras dan \"kuasa misteri\" sentiasa meruntuhkan binaan tersebut setiap kali ia hampir siap.",
         synopsis_p2: "Seorang pegawai British, <strong>Robinson</strong>, buntu mencari penyelesaian. Namun, di tengah kekalutan itu, hatinya tertawan oleh <strong>Solungkoi</strong>, gadis Dusun yang paling jelita di kampung tersebut. Percintaan dua benua ini berputik indah, namun dicemburui oleh Intang, seorang pemuda tempatan yang menaruh dendam.",
@@ -23,14 +23,14 @@ const translations = {
         synopsis_p4: "Tersepit dalam dilema antara tugas kepada empayar dan cinta sejatinya, Robinson akhirnya tewas. Beliau melakukan pengkhianatan terbesar dengan membiarkan Solungkoi dikorbankan. Gadis itu diberi minuman memabukkan sebelum ditenggelamkan hidup-hidup di dasar sungai bersama tiang jambatan. Sebelum nafasnya terhenti, dia melafazkan sumpahan: <em>\"Jambatan ini tidak akan kukuh selagi darah Robinson tidak mengalir sama!\"</em>.",
         synopsis_p5: "Jambatan itu akhirnya teguh berdiri, namun jiwa Robinson musnah. Dihantui rasa bersalah yang tidak tertanggung, Robinson akhirnya mengukir nama <strong>SOLUNGKOI</strong> pada plat besi jambatan itu sebelum menamatkan riwayatnya sendiri dengan terjun ke dalam sungai yang sama. Kini, kisah mereka kekal sebagai peringatan abadi tentang harga sebuah kesetiaan dan pengorbanan.",
 
-        // Tentang AR
+        // Tentang AR (UPDATED)
         ar_title: "Cara Menggunakan AR",
-        step_1: "Imbas Kod QR", step_1_desc: "Dapatkan akses aplikasi melalui kod QR yang disediakan.",
-        step_2: "Pilih Bahasa", step_2_desc: "Pilih naratif dalam BM, English, atau Kadazan-Dusun.",
-        step_3: "Sedia Buku", step_3_desc: "Buka buku cerita pada halaman yang mempunyai penanda.",
-        step_4: "Halakan Kamera", step_4_desc: "Pastikan pencahayaan terang dan halakan kamera ke buku.",
-        step_5: "Lihat Magis", step_5_desc: "Karakter dan animasi 3D akan muncul di atas buku!",
-        step_6: "Interaksi", step_6_desc: "Sentuh skrin untuk mendengar audio atau melihat aksi.",
+        ar_desc: "Kami menggunakan teknologi WebAR berasaskan penanda. Ikuti langkah di bawah untuk melihat magisnya.",
+        step_1: "Akses Aplikasi", step_1_desc: "Tekan pautan atau imbas kod QR.",
+        step_2: "Sedia Buku", step_2_desc: "Buka buku cerita pada halaman yang mempunyai penanda.",
+        step_3: "Halakan Kamera", step_3_desc: "Pastikan pencahayaan terang dan halakan kamera ke buku.",
+        step_4: "Lihat Magis", step_4_desc: "Karakter dan animasi 3D akan muncul di atas buku!",
+        step_5: "Interaksi", step_5_desc: "Sentuh skrin untuk mendengar audio atau melihat aksi.",
         ar_preview_header: "Visualisasi Digital",
 
         // Pasukan Kami
@@ -47,11 +47,12 @@ const translations = {
         lbl_location: "Lokasi",
         lbl_exhibition: "Pameran",
 
-        // Cuba AR Page
-        select_lang_title: "Pilih Bahasa AR",
-        select_lang_desc: "Sila pilih bahasa untuk memulakan pengalaman AR.",
+        // Cuba AR Page (UPDATED)
+        select_lang_title: "Mula Pengalaman AR",
+        select_lang_desc: "Tekan butang di bawah atau imbas kod QR untuk masuk.",
+        btn_enter_ar: "Masuk Dunia AR",
         modal_title: "Imbas Kod QR",
-        modal_desc: "Halakan kamera telefon anda pada kod ini untuk melancarkan penapis AR."
+        modal_desc: "Halakan kamera telefon anda pada kod ini."
     },
 
     en: {
@@ -75,13 +76,14 @@ const translations = {
         synopsis_p4: "Torn between duty to the empire and his true love, Robinson committed the ultimate betrayal. Solungkoi was sacrificed alive at the riverbed. Before drowning, she cursed: <em>\"This bridge will not stand firm until Robinson's blood flows with it!\"</em>.",
         synopsis_p5: "The bridge stood firm, but Robinson's soul was shattered. Haunted by guilt, he carved the name <strong>SOLUNGKOI</strong> onto the bridge before taking his own life in the same river. Today, their story remains a reminder of the price of loyalty.",
 
+        // About AR (UPDATED)
         ar_title: "How To Use AR",
-        step_1: "Scan QR", step_1_desc: "Access the app via the provided QR code.",
-        step_2: "Select Language", step_2_desc: "Choose narrative in Malay, English, or Kadazan-Dusun.",
-        step_3: "Prepare Book", step_3_desc: "Open the storybook to a page with a marker.",
-        step_4: "Point Camera", step_4_desc: "Ensure good lighting and point your camera at the book.",
-        step_5: "See Magic", step_5_desc: "3D characters will appear on the page!",
-        step_6: "Interact", step_6_desc: "Touch screen to hear audio or trigger actions.",
+        ar_desc: "We use WebAR technology. Follow these steps to see the magic.",
+        step_1: "Access App", step_1_desc: "Click link or scan QR code.",
+        step_2: "Prepare Book", step_2_desc: "Open the storybook to a page with a marker.",
+        step_3: "Point Camera", step_3_desc: "Ensure good lighting and point your camera at the book.",
+        step_4: "See Magic", step_4_desc: "3D characters will appear on the page!",
+        step_5: "Interact", step_5_desc: "Touch screen to hear audio or trigger actions.",
         ar_preview_header: "Digital Visualization",
 
         team_title: "Our Team",
@@ -96,10 +98,12 @@ const translations = {
         lbl_location: "Location",
         lbl_exhibition: "Exhibition",
 
-        select_lang_title: "Select AR Language",
-        select_lang_desc: "Please choose a language to start the AR experience.",
+        // Cuba AR Page (UPDATED)
+        select_lang_title: "Start AR Experience",
+        select_lang_desc: "Click the button below or scan the QR code to enter.",
+        btn_enter_ar: "Enter AR World",
         modal_title: "Scan QR Code",
-        modal_desc: "Point your phone camera at this code to launch the AR filter."
+        modal_desc: "Point your phone camera at this code."
     },
 
     kd: {
@@ -123,13 +127,14 @@ const translations = {
         synopsis_p4: "Robinson minangada di Solungkoi. Pinoirak isido id suang bawang. Pogulu nopatai, minamara isido: <em>\"Jambatan diti amu kogirot gisom do raha di Robinson tumiris!\"</em>.",
         synopsis_p5: "Tu nokosorou do dusa, minonuat i Robinson ngaran <strong>SOLUNGKOI</strong> id jambatan dii pogulu minanangon id bawang dii.",
 
+        // About AR (UPDATED)
         ar_title: "Carano momoguno AR",
-        step_1: "Imbas QR", step_1_desc: "Akses aplikasi maya QR.",
-        step_2: "Pili Boros", step_2_desc: "Pili boros BM, English, toi Kadazan.",
-        step_3: "Sedia Buuk", step_3_desc: "Ukabo buuk id bolikan di haro tanda.",
-        step_4: "Halako Kamera", step_4_desc: "Pastikan anawau.",
-        step_5: "Intaai Magis", step_5_desc: "Karakter 3D nopoimbulai!",
-        step_6: "Interaksi", step_6_desc: "Tigogo skrin telefon nu.",
+        ar_desc: "Gunoon dahai teknologi WebAR. Tumboyo lankan diti.",
+        step_1: "Akses Aplikasi", step_1_desc: "Tigogo link toi imbaso kod QR.",
+        step_2: "Sedia Buuk", step_2_desc: "Ukabo buuk id bolikan di haro tanda.",
+        step_3: "Halako Kamera", step_3_desc: "Pastikan anawau.",
+        step_4: "Intaai Magis", step_4_desc: "Karakter 3D nopoimbulai!",
+        step_5: "Interaksi", step_5_desc: "Tigogo skrin telefon nu.",
 
         team_title: "Tinimungan Dahai",
         supervisor_title: "Mononuduk Projek",
@@ -143,8 +148,10 @@ const translations = {
         lbl_location: "Koiyonon",
         lbl_exhibition: "Pameran",
 
-        select_lang_title: "Pili Boros AR",
-        select_lang_desc: "Pili boros moi do popotimpuun.",
+        // Cuba AR Page (UPDATED)
+        select_lang_title: "Timpuun AR",
+        select_lang_desc: "Tigogo butang id siriba toi imbaso kod QR.",
+        btn_enter_ar: "Suang Dunia AR",
         modal_title: "Imbas Kod QR",
         modal_desc: "Halako kamera telefon nu hiti."
     }
