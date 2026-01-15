@@ -9,7 +9,8 @@
     --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     
     --primary-accent: #00d2ff;   /* Cyan Glow for AR */
-    --secondary-accent: #ff007a; /* Neon Pink/Magenta for contrast */
+	--legend-gradient: linear-gradient(to bottom, #D18C30 20%, #8B5A2B 80%);
+    --secondary-accent: #D18C30;
     --text-main: #ffffff;
     --text-muted: #b3b3b3;
     
@@ -34,9 +35,62 @@ body {
     min-height: 100vh;
 }
 
+.video-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Placed behind content */
+    overflow: hidden;
+}
+
+.video-bg video {
+    min-width: 100%; 
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+/* IMPORTANT: The Minimalist Overlay */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Lower the alpha values (the last number) to make it more transparent */
+    background: linear-gradient(
+        to bottom, 
+        rgba(248, 250, 252, 0.4), /* Changed from 0.85 to 0.4 */
+        rgba(248, 250, 252, 0.2)  /* Changed from 0.7 to 0.2 */
+    );
+
+    /* Reduce blur from 4px to 1px or 2px so the video is sharper */
+    backdrop-filter: blur(1.5px); 
+}
+
 h1, h2, h3, h4, .logo {
-    font-family: 'Cinzel', serif; /* Legendary Header */
+    font-family: 'Cinzel', serif;
     font-weight: 700;
+    /* Mencipta kesan gradient dari atas ke bawah */
+    background: linear-gradient(to bottom, #D18C30 20%, #8B5A2B 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block; /* Penting supaya gradient muncul dengan betul */
+}
+
+h1 {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 a { text-decoration: none; transition: 0.3s ease; }
@@ -61,57 +115,66 @@ ul { list-style: none; }
 header {
     position: fixed;
     top: 0;
-    width: 100%;
     z-index: 1000;
+    width: 100%;
     padding: 15px 0;
-    transition: 0.3s;
+    transition: 0.3s ease;
 }
 
 .navbar {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 15px 30px;
     
-    /* Nav is now a floating glass pill */
-    background: rgba(15, 12, 41, 0.7);
+    /* Transparent Glass Effect */
+    background: rgba(255, 255, 255, 0.05); /* Very light white tint */
     backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    
+    /* Thinner, subtle border */
+    border: 1px solid rgba(255, 255, 255, 0.15); 
     border-radius: 50px;
-    border: 1px solid rgba(255,255,255,0.1);
+    
+    /* Optional: Adds depth to the glass */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
 .logo {
-    font-size: 1.2rem;
-    color: var(--primary-accent);
+    font-size: 1.5rem;
     letter-spacing: 1px;
-    text-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+    /* Memberikan sedikit 'glow' pada logo supaya nampak premium */
+    filter: drop-shadow(0 0 5px rgba(209, 140, 48, 0.2));
 }
 
 .nav-links {
     display: flex;
-    gap: 25px;
     align-items: center;
+    gap: 25px;
 }
 
 .nav-links a {
+    position: relative;
     color: var(--text-main);
     font-size: 0.9rem;
     font-weight: 500;
-    position: relative;
+    text-decoration: none; /* Ensures no default underline */
+	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* Hover & Active States */
 .nav-links a::after {
     content: '';
     position: absolute;
-    width: 0;
-    height: 2px;
     bottom: -4px;
     left: 0;
+    width: 0;
+    height: 2px;
     background-color: var(--secondary-accent);
-    transition: width 0.3s;
+    transition: width 0.3s ease;
 }
 
 .nav-links a:hover::after,
@@ -120,20 +183,12 @@ header {
     width: 100%;
 }
 
+/* Clean up the Contact button to look like a regular link as seen in the image */
 .btn-contact {
-    background: linear-gradient(90deg, var(--primary-accent), #3a7bd5);
-    padding: 8px 20px !important;
-    border-radius: 30px;
-    color: #fff !important;
-    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
+    background: none;
+    padding: 0;
+    border: none;
 }
-
-.btn-contact:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.6);
-}
-
-.btn-contact::after { display: none; } /* Remove underline for button */
 
 /* =========================================
    5. LAYOUT UTILITIES
@@ -206,34 +261,47 @@ header {
 }
 
 .subtitle {
-    color: var(--primary-accent);
+    color: #D18C30; /* Updated to match your highlight color */
     letter-spacing: 3px;
     font-weight: 600;
     font-size: 0.9rem;
     text-transform: uppercase;
     margin-bottom: 10px;
+    
+    /* Optional: Add a subtle text shadow if it's hard to see 
+       over the video background */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero h1 {
     font-size: 4rem;
     line-height: 1.1;
     margin-bottom: 20px;
-    background: -webkit-linear-gradient(white, #a0a0a0);
+    text-align: center;
+    /* Gradient mixing #D18C30 with a darker bronze #8B5A2B */
+    background: linear-gradient(to bottom, #D18C30 20%, #8B5A2B 80%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
 }
 
 .highlight {
-    color: var(--primary-accent);
-    -webkit-text-fill-color: var(--primary-accent);
-    text-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+    /* Matches the same gradient for consistency */
+    background: linear-gradient(to right, #D18C30, #A66D25);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 15px rgba(209, 140, 48, 0.3);
 }
-
 .description {
     font-size: 1.1rem;
-    color: var(--text-muted);
+    color: #ffffff; /* Changed to pure white */
     margin-bottom: 30px;
     max-width: 500px;
+    
+    /* Optional: Adding a very subtle shadow helps white text 
+       stay visible if the video background has light patches */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .hero-btns {
@@ -242,17 +310,22 @@ header {
 }
 
 .btn-primary {
-    background: var(--primary-accent);
-    color: #000;
+    background: #D18C30; /* Updated to warm gold */
+    color: #fff; /* Changed text to white for better contrast on gold */
     padding: 15px 35px;
     border-radius: 50px;
     font-weight: 700;
-    box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+    /* Updated shadow to match the warm gold glow */
+    box-shadow: 0 10px 20px rgba(209, 140, 48, 0.3);
+    border: none;
+    cursor: pointer;
+    display: inline-block;
 }
 
 .btn-primary:hover {
-    background: #fff;
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+    background: #e59d3e; /* A slightly lighter gold for hover */
+    color: #fff;
+    box-shadow: 0 15px 30px rgba(209, 140, 48, 0.5);
     transform: translateY(-3px);
 }
 
@@ -291,84 +364,139 @@ header {
 }
 
 /* =========================================
-   7. AR PAGE (Tentang AR)
+   NEW 3D AR CAROUSEL
    ========================================= */
-.ar-detail-section { width: 100%; }
 
-.ar-steps-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    margin: 50px 0;
+.ar-page-wrapper {
+    min-height: 100vh;
+    padding: 80px 20px;
+    background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+    overflow-x: hidden;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--primary-accent);
+    margin-bottom: 60px;
+}
+
+.ar-carousel-container {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 2000px; /* Essential for 3D effect */
+}
+
+.ar-cards-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
 }
 
 .ar-step-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 30px 20px;
-    border-radius: 20px;
-    transition: 0.3s;
+    position: absolute;
+    width: 350px;
+    height: 420px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(240, 240, 240, 0.95));
+    border-radius: 24px;
+    padding: 40px 30px;
     text-align: center;
-}
-
-.ar-step-card:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--primary-accent);
-    transform: translateY(-10px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .ar-step-icon {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     background: linear-gradient(135deg, var(--primary-accent), #3a7bd5);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: bold;
     color: #fff;
-    margin: 0 auto 20px;
-    box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+    margin-bottom: 25px;
+    box-shadow: 0 8px 24px rgba(0, 210, 255, 0.4);
 }
 
 .ar-step-card h4 {
-    color: var(--primary-accent);
-    margin-bottom: 10px;
+    color: #1e293b;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 15px;
 }
 
 .ar-step-card p {
-    font-size: 0.9rem;
-    color: var(--text-muted);
+    font-size: 1rem;
+    color: #475569;
+    line-height: 1.6;
 }
 
-.ar-preview-box {
+/* Navigation Buttons */
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 56px;
+    height: 56px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     display: flex;
-    background: rgba(0,0,0,0.4);
-    border: 1px solid var(--glass-border);
-    border-radius: 30px;
-    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-button:hover {
+    background: var(--primary-accent);
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.nav-button-left { left: 20px; }
+.nav-button-right { right: 20px; }
+
+/* Dots Navigation */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
     margin-top: 40px;
 }
 
-.preview-content {
-    flex: 1;
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: left;
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.preview-content h3 {
-    font-size: 2rem;
-    color: var(--secondary-accent);
-    margin-bottom: 20px;
+.dot.active {
+    background: var(--primary-accent);
+    width: 32px;
+    border-radius: 6px;
 }
-
-.preview-visual { flex: 1; }
-.ar-image { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
-
 /* =========================================
    8. SINOPSIS & STORY
    ========================================= */
@@ -472,6 +600,33 @@ header {
     margin: 0;
 }
 
+.hero-content.glass-panel {
+    padding: 40px;          /* Adds space inside the box */
+    max-width: 600px;       /* Keeps the box from getting too wide */
+    
+    /* Optional: Make the glass a bit more visible than the default */
+    background: rgba(255, 255, 255, 0.1); 
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    
+    /* Ensure the text inside doesn't hit the edges */
+    margin-right: 20px; 
+	text-align: center;      /* Centers the text inside (h1, p, subtitle) */
+    margin-left: auto;       /* Centers the box itself horizontally */
+    margin-right: auto;      /* Centers the box itself horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;     /* Centers the buttons and other flex items */
+}
+
+.hero h1 {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    text-align: center;      /* Specifically ensures the h1 is centered */
+    background: -webkit-linear-gradient(white, #a0a0a0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 /* =========================================
    RESPONSIF (TELEFON)
    ========================================= */
@@ -607,6 +762,7 @@ header {
     margin-bottom: 15px;
 }
 
+
 /* =========================================
    12. RESPONSIVE DESIGN (Mobile)
    ========================================= */
@@ -622,6 +778,10 @@ header {
     
     .ar-steps-grid, .lang-grid, .contact-grid { grid-template-columns: 1fr; }
     .ar-preview-box { flex-direction: column; }
-    
+    .hero-content.glass-panel {
+        margin-right: 0;
+        padding: 30px 20px;
+        text-align: center;
+    }
     .container { padding-top: 180px; } /* More space for stacked nav */
 }

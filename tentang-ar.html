@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teknologi AR</title>
+    <title>Teknologi AR | Lagenda Jambatan Tamparuli</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
@@ -22,32 +23,115 @@
         </nav>
     </header>
 
-    <main class="container">
-        <h2 class="section-title">Bagaimana Ia Berfungsi?</h2>
-        <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto;">
-            Kami menggunakan teknologi <strong>Image Tracking</strong>. Aplikasi mengesan imej pada buku dan memaparkan objek 3D di atasnya secara nyata.
-        </p>
+    <main class="ar-page-wrapper">
+        <div class="container">
+            <h2 class="section-title">Cara Menggunakan AR</h2>
+            
+            <div class="ar-carousel-container">
+                <button class="nav-button nav-button-left" id="prevBtn">
+                    <i data-lucide="chevron-left"></i>
+                </button>
 
-        <div class="ar-steps-grid">
-            <div class="ar-step-card"><div class="ar-step-icon">1</div><h4>Imbas QR</h4><p>Dapatkan akses aplikasi melalui kod QR.</p></div>
-            <div class="ar-step-card"><div class="ar-step-icon">2</div><h4>Pilih Bahasa</h4><p>BM, English, atau Kadazan-Dusun.</p></div>
-            <div class="ar-step-card"><div class="ar-step-icon">3</div><h4>Sedia Buku</h4><p>Buka buku pada halaman bertanda.</p></div>
-            <div class="ar-step-card"><div class="ar-step-icon">4</div><h4>Halakan Kamera</h4><p>Pastikan pencahayaan cukup terang.</p></div>
-            <div class="ar-step-card"><div class="ar-step-icon">5</div><h4>Lihat Magis</h4><p>Karakter 3D akan muncul!</p></div>
-            <div class="ar-step-card"><div class="ar-step-icon">6</div><h4>Interaksi</h4><p>Sentuh skrin untuk kesan animasi.</p></div>
-        </div>
+                <div class="ar-cards-wrapper" id="cardsWrapper">
+                    <div class="ar-step-card" data-index="0">
+                        <div class="ar-step-icon">1</div>
+                        <h4>Imbas QR</h4>
+                        <p>Dapatkan akses aplikasi melalui kod QR.</p>
+                    </div>
+                    <div class="ar-step-card" data-index="1">
+                        <div class="ar-step-icon">2</div>
+                        <h4>Pilih Bahasa</h4>
+                        <p>BM, English, atau Kadazan-Dusun.</p>
+                    </div>
+                    <div class="ar-step-card" data-index="2">
+                        <div class="ar-step-icon">3</div>
+                        <h4>Sedia Buku</h4>
+                        <p>Buka buku pada halaman bertanda.</p>
+                    </div>
+                    <div class="ar-step-card" data-index="3">
+                        <div class="ar-step-icon">4</div>
+                        <h4>Halakan Kamera</h4>
+                        <p>Pastikan pencahayaan cukup terang.</p>
+                    </div>
+                    <div class="ar-step-card" data-index="4">
+                        <div class="ar-step-icon">5</div>
+                        <h4>Lihat Magis</h4>
+                        <p>Karakter 3D akan muncul!</p>
+                    </div>
+                    <div class="ar-step-card" data-index="5">
+                        <div class="ar-step-icon">6</div>
+                        <h4>Interaksi</h4>
+                        <p>Sentuh skrin untuk kesan animasi.</p>
+                    </div>
+                </div>
 
-        <div class="ar-preview-box">
-            <div class="preview-content">
-                <h3>Visualisasi Digital</h3>
-                <p>Contoh paparan antaramuka apabila kamera mengesan buku cerita.</p>
+                <button class="nav-button nav-button-right" id="nextBtn">
+                    <i data-lucide="chevron-right"></i>
+                </button>
             </div>
-            <div class="preview-visual">
-                <img src="./assets/images/AR.jpg" alt="AR Demo" class="ar-image">
-            </div>
+
+            <div class="carousel-dots" id="dotsWrapper"></div>
         </div>
     </main>
 
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        // Carousel Logic
+        let activeIndex = 0;
+        const cards = document.querySelectorAll('.ar-step-card');
+        const dotsWrapper = document.getElementById('dotsWrapper');
+        const totalCards = cards.length;
+
+        // Create Dots
+        cards.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => { activeIndex = i; updateCarousel(); });
+            dotsWrapper.appendChild(dot);
+        });
+
+        function updateCarousel() {
+            cards.forEach((card, index) => {
+                let position = index - activeIndex;
+                
+                // Handle circular wrap-around
+                if (position > totalCards / 2) position -= totalCards;
+                if (position < -totalCards / 2) position += totalCards;
+
+                const absPosition = Math.abs(position);
+                const isActive = position === 0;
+
+                // Apply the 3D transforms from your new design
+                card.style.transform = `
+                    translateX(${position * 280}px)
+                    translateZ(${-absPosition * 100}px)
+                    rotateY(${position * -8}deg)
+                    scale(${1 - absPosition * 0.1})
+                `;
+                card.style.opacity = absPosition > 2 ? '0' : `${1 - absPosition * 0.2}`;
+                card.style.zIndex = 10 - absPosition;
+                card.style.pointerEvents = isActive ? 'auto' : 'none';
+            });
+
+            // Update dots
+            document.querySelectorAll('.dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === activeIndex);
+            });
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            activeIndex = (activeIndex + 1) % totalCards;
+            updateCarousel();
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            activeIndex = (activeIndex - 1 + totalCards) % totalCards;
+            updateCarousel();
+        });
+
+        // Initialize
+        updateCarousel();
+        lucide.createIcons();
+    </script>
 </body>
 </html>
