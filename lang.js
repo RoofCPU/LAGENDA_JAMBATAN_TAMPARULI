@@ -24,8 +24,7 @@ const translations = {
         synopsis_p5: "Jambatan itu akhirnya teguh berdiri, namun jiwa Robinson musnah. Dihantui rasa bersalah yang tidak tertanggung, Robinson akhirnya mengukir nama <strong>SOLUNGKOI</strong> pada plat besi jambatan itu sebelum menamatkan riwayatnya sendiri dengan terjun ke dalam sungai yang sama. Kini, kisah mereka kekal sebagai peringatan abadi tentang harga sebuah kesetiaan dan pengorbanan.",
 
         // Tentang AR
-        ar_title: "Teknologi Augmented Reality",
-        ar_desc: "Kami menggunakan teknologi WebAR berasaskan penanda (Marker-based Tracking). Kamera peranti anda akan mengesan imej pada buku fizikal dan memaparkan objek 3D serta animasi di atasnya secara nyata.",
+        ar_title: "Cara Menggunakan AR",
         step_1: "Imbas Kod QR", step_1_desc: "Dapatkan akses aplikasi melalui kod QR yang disediakan.",
         step_2: "Pilih Bahasa", step_2_desc: "Pilih naratif dalam BM, English, atau Kadazan-Dusun.",
         step_3: "Sedia Buku", step_3_desc: "Buka buku cerita pada halaman yang mempunyai penanda.",
@@ -76,8 +75,7 @@ const translations = {
         synopsis_p4: "Torn between duty to the empire and his true love, Robinson committed the ultimate betrayal. Solungkoi was sacrificed alive at the riverbed. Before drowning, she cursed: <em>\"This bridge will not stand firm until Robinson's blood flows with it!\"</em>.",
         synopsis_p5: "The bridge stood firm, but Robinson's soul was shattered. Haunted by guilt, he carved the name <strong>SOLUNGKOI</strong> onto the bridge before taking his own life in the same river. Today, their story remains a reminder of the price of loyalty.",
 
-        ar_title: "Augmented Reality Technology",
-        ar_desc: "We use WebAR technology. Your camera detects images on the book and overlays 3D objects and animations on them in real-time.",
+        ar_title: "How To Use AR",
         step_1: "Scan QR", step_1_desc: "Access the app via the provided QR code.",
         step_2: "Select Language", step_2_desc: "Choose narrative in Malay, English, or Kadazan-Dusun.",
         step_3: "Prepare Book", step_3_desc: "Open the storybook to a page with a marker.",
@@ -125,8 +123,7 @@ const translations = {
         synopsis_p4: "Robinson minangada di Solungkoi. Pinoirak isido id suang bawang. Pogulu nopatai, minamara isido: <em>\"Jambatan diti amu kogirot gisom do raha di Robinson tumiris!\"</em>.",
         synopsis_p5: "Tu nokosorou do dusa, minonuat i Robinson ngaran <strong>SOLUNGKOI</strong> id jambatan dii pogulu minanangon id bawang dii.",
 
-        ar_title: "Teknologi Augmented Reality",
-        ar_desc: "Gunoon dahai teknologi WebAR. Kamera telefon nu manahak kointalangan objek 3D id buuk.",
+        ar_title: "Carano momoguno AR",
         step_1: "Imbas QR", step_1_desc: "Akses aplikasi maya QR.",
         step_2: "Pili Boros", step_2_desc: "Pili boros BM, English, toi Kadazan.",
         step_3: "Sedia Buuk", step_3_desc: "Ukabo buuk id bolikan di haro tanda.",
