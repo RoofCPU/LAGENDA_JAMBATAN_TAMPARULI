@@ -10,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
 
   <style>
-    body { margin: 0; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { margin: 0; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
     
     /* Force Hide VR/Fullscreen Buttons */
     .a-enter-vr-button, .a-enter-ar-button { display: none !important; }
@@ -86,19 +86,21 @@
 
   <script>
     AFRAME.registerComponent('free-look-controller', {
-      schema: {
-        autoRotateSpeed: {type: 'number', default: 0.1}
-      },
+      schema: { },
       init: function () {
+        // Flags
+        this.isMouseDown = false;
         this.isDragging = false;
         this.isPanning = false;
-        this.lastInteraction = 0;
         
-        // Coordinates for calculations
+        // Coords
         this.startX = 0;
         this.startY = 0;
         this.initialPinchDistance = 0;
         this.startScale = 1;
+        
+        // Thresholds
+        this.dragThreshold = 5; 
 
         // Bindings
         this.onMouseDown = this.onMouseDown.bind(this);
@@ -111,9 +113,10 @@
         this.onContextMenu = this.onContextMenu.bind(this);
 
         // Listeners
-        document.addEventListener('mousedown', this.onMouseDown);
-        document.addEventListener('mousemove', this.onMouseMove);
-        document.addEventListener('mouseup', this.onMouseUp);
+        window.addEventListener('mousedown', this.onMouseDown);
+        window.addEventListener('mousemove', this.onMouseMove);
+        window.addEventListener('mouseup', this.onMouseUp);
+        
         document.addEventListener('touchstart', this.onTouchStart, {passive: false});
         document.addEventListener('touchmove', this.onTouchMove, {passive: false});
         document.addEventListener('touchend', this.onTouchEnd);
@@ -121,66 +124,69 @@
         document.addEventListener('contextmenu', this.onContextMenu);
       },
 
-      tick: function (time, timeDelta) {
-        // Auto-Rotate (Idle Camera) - Only when not interacting
-        if (!this.isDragging && !this.isPanning && (Date.now() - this.lastInteraction > 3000)) {
-           this.el.object3D.rotation.y += this.data.autoRotateSpeed * (timeDelta / 100);
-        }
-      },
+      tick: function (time, timeDelta) {}, // Auto-rotate disabled
 
       onContextMenu: function(e) { e.preventDefault(); }, 
 
       // --- MOUSE LOGIC ---
       onMouseDown: function(e) {
-        this.lastInteraction = Date.now();
+        if(e.target.tagName !== 'BUTTON') { 
+             e.preventDefault(); // Keep this PC fix!
+        }
+
+        this.isMouseDown = true;
+        this.isDragging = false; 
+        this.isPanning = false;
+
         this.startX = e.clientX;
         this.startY = e.clientY;
-
-        if (e.button === 0) { // Left Click = Orbit (Rotate)
-            this.isDragging = true;
-        } else if (e.button === 2) { // Right Click = Pan (Move)
-            this.isPanning = true;
-        }
       },
 
       onMouseMove: function(e) {
-        if (!this.isDragging && !this.isPanning) return;
-        this.lastInteraction = Date.now();
+        if (!this.isMouseDown) return;
         
         const deltaX = e.clientX - this.startX;
         const deltaY = e.clientY - this.startY;
-        this.startX = e.clientX;
-        this.startY = e.clientY;
+
+        // Start Dragging check
+        if (!this.isDragging && !this.isPanning) {
+            const distance = Math.hypot(deltaX, deltaY);
+            if (distance > this.dragThreshold) {
+                if (e.button === 0) { this.isDragging = true; } 
+                else if (e.button === 2) { this.isPanning = true; }
+            }
+        }
 
         if (this.isDragging) {
             this.handleOrbit(deltaX, deltaY);
-        } else if (this.isPanning) {
+            this.startX = e.clientX;
+            this.startY = e.clientY;
+        } 
+        else if (this.isPanning) {
             this.handlePan(deltaX, deltaY);
+            this.startX = e.clientX;
+            this.startY = e.clientY;
         }
       },
 
-      onMouseUp: function() {
+      onMouseUp: function(e) {
+        this.isMouseDown = false;
         this.isDragging = false;
         this.isPanning = false;
       },
 
       onWheel: function(e) {
-        // Scroll = Zoom (Distance)
         let zoomSpeed = e.deltaY * -0.0005; 
         this.handleZoom(zoomSpeed);
       },
 
       // --- TOUCH LOGIC ---
       onTouchStart: function(e) {
-        this.lastInteraction = Date.now();
-        
         if (e.touches.length === 1) {
-            // One Finger = Orbit
             this.isDragging = true;
             this.startX = e.touches[0].clientX;
             this.startY = e.touches[0].clientY;
         } else if (e.touches.length === 2) {
-            // Two Fingers = Pan AND Zoom
             this.isPanning = true;
             this.startX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
             this.startY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
@@ -193,8 +199,6 @@
       },
 
       onTouchMove: function(e) {
-        this.lastInteraction = Date.now();
-
         if (e.touches.length === 1 && this.isDragging) {
             const deltaX = e.touches[0].clientX - this.startX;
             const deltaY = e.touches[0].clientY - this.startY;
@@ -203,17 +207,14 @@
             this.handleOrbit(deltaX, deltaY);
         } 
         else if (e.touches.length === 2 && this.isPanning) {
-            // 1. Calculate Pan
             const currentCenterX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
             const currentCenterY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
             const deltaX = currentCenterX - this.startX;
             const deltaY = currentCenterY - this.startY;
-            
             this.startX = currentCenterX;
             this.startY = currentCenterY;
             this.handlePan(deltaX, deltaY);
 
-            // 2. Calculate Zoom
             const currentDist = Math.hypot(
                 e.touches[0].pageX - e.touches[1].pageX,
                 e.touches[0].pageY - e.touches[1].pageY
@@ -224,42 +225,28 @@
         }
       },
 
-      onTouchEnd: function() {
+      onTouchEnd: function(e) {
         this.isDragging = false;
         this.isPanning = false;
       },
 
-      // --- VIRTUAL CAMERA MATH (Increased Freedom) ---
-      
-      // 1. Orbit (Rotate View)
+      // --- VIRTUAL CAMERA MATH ---
       handleOrbit: function(dX, dY) {
         this.el.object3D.rotation.y += dX * 0.005;
         this.el.object3D.rotation.x += dY * 0.005;
-        
-        // LIMIT RELAXED: +/- 1.6 radians (approx 90 degrees)
-        // User can look almost completely top-down or bottom-up
         this.el.object3D.rotation.x = Math.min(Math.max(this.el.object3D.rotation.x, -1.6), 1.6);
       },
 
-      // 2. Pan (Move Camera Position)
       handlePan: function(dX, dY) {
-        // Sensitivity 0.001 (Same power)
         this.el.object3D.position.x += dX * 0.001;
         this.el.object3D.position.y -= dY * 0.001; 
-        
-        // LIMIT RELAXED: +/- 3 units
-        // User can move model significantly off-center
         this.el.object3D.position.x = Math.min(Math.max(this.el.object3D.position.x, -3), 3);
         this.el.object3D.position.y = Math.min(Math.max(this.el.object3D.position.y, -3), 3);
       },
 
-      // 3. Zoom (Distance)
       handleZoom: function(change, isAbsolute = false) {
         let currentS = this.el.object3D.scale.x;
         let newS = isAbsolute ? (this.startScale + change) : (currentS + change);
-        
-        // LIMIT RELAXED: 0.005 to 2.0
-        // Allows massive close-ups or tiny views
         newS = Math.min(Math.max(newS, 0.005), 2.0); 
         this.el.object3D.scale.set(newS, newS, newS);
       }
@@ -283,7 +270,6 @@
     
     <div id="info-panel">
       <button id="replay-btn" onclick="replayAudio()">↻ Replay</button>
-      
       <div id="rotation-hint"></div>
       <div id="scan-guide"></div>
     </div>
@@ -315,7 +301,10 @@
       <a-asset-item id="model-15" src="./assets/models/scene-kecil-page15.glb"></a-asset-item>
     </a-assets>
 
-    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+    <a-camera position="0 0 0" look-controls="enabled: false">
+        <a-entity light="type: directional; intensity: 3; castShadow: false; color: #ffffff;" position="0 0 1"></a-entity>
+    </a-camera>
+    <a-entity light="type: ambient; intensity: 2; color: #ffffff;"></a-entity>
 
     <a-entity mindar-image-target="targetIndex: 0" id="target-1">
       <a-gltf-model src="#model-1" rotation="0 0 0" position="0 0 0" scale="0.05 0.05 0.05" animation-mixer="clip: *; loop: repeat" free-look-controller></a-gltf-model>
@@ -496,7 +485,7 @@
         replayBtn.style.display = "none"; 
     }
 
-    // --- 4. STRICT TARGET EVENTS (Loop 1-15) ---
+    // --- 4. STRICT TARGET EVENTS ---
     for (let i = 1; i <= 15; i++) {
         const targetElement = document.querySelector(`[mindar-image-target="targetIndex: ${i-1}"]`);
         
@@ -505,6 +494,15 @@
                 if (activePage !== null && activePage !== i) {
                     return;
                 }
+
+                // --- RESET TRANSFORMATIONS (Animation mixer is already on target, so we don't need to add it) ---
+                const model = targetElement.querySelector('a-gltf-model');
+                if (model) {
+                    model.object3D.position.set(0, 0, 0);
+                    model.object3D.rotation.set(0, 0, 0);
+                    model.object3D.scale.set(0.05, 0.05, 0.05);
+                }
+                // ----------------------------------
 
                 if (debounceTimer) clearTimeout(debounceTimer);
 
